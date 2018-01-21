@@ -1,4 +1,4 @@
-defmodule PraterWeb.PageController do
+defmodule PraterWeb.RoomController do
   use PraterWeb, :controller
 
   def index(conn, _params) do
