@@ -2,7 +2,9 @@
   <div class="col-md-3">
     <h3>Rooms</h3>
     <ul class="list-group">
-      <li class="list-group-item">Lobby</li>
+      <%= for room <- @rooms do %>
+        <li class="list-group-item"><%= room.name %></li>
+      <% end %>
     </ul>
   </div>
   <div class="col-md-9">

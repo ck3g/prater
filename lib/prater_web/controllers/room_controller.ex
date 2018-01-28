@@ -2,6 +2,7 @@ defmodule PraterWeb.RoomController do
   use PraterWeb, :controller
 
   def index(conn, _params) do
-    render conn, "index.html"
+    rooms = Prater.Conversation.list_rooms()
+    render conn, "index.html", rooms: rooms
   end
 end
