@@ -1,24 +1,21 @@
 defmodule PraterWeb.RoomController do
   use PraterWeb, :controller
 
+  alias Prater.Conversation
+  alias Prater.Conversation.Room
+
   def index(conn, _params) do
-    rooms = Prater.Conversation.list_rooms()
+    rooms = Conversation.list_rooms()
     render conn, "index.html", rooms: rooms
   end
 
   def new(conn, _params) do
-    alias Prater.Conversation.Room
-    changeset = Room.changeset(%Room{}, %{})
+    changeset = Conversation.change_room(%Room{})
     render conn, "new.html", changeset: changeset
   end
 
   def create(conn, %{"room" => room_params}) do
-    alias Prater.Conversation.Room
-    alias Prater.Repo
-    %Room{}
-    |> Room.changeset(room_params)
-    |> Repo.insert()
-    |> case do
+    case Conversation.create_room(room_params) do
       {:ok, room} ->
         conn
         |> put_flash(:info, "Room created successfully.")
