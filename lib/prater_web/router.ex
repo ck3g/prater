@@ -17,12 +17,7 @@ defmodule PraterWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", RoomController, :index
-    get "/rooms/new", RoomController, :new
-    post "/rooms", RoomController, :create
-    get "/rooms/:id", RoomController, :show
-    get "/rooms/:id/edit", RoomController, :edit
-    put "/rooms/:id", RoomController, :update
-    delete "/rooms/:id", RoomController, :delete
+    resources "/rooms", RoomController
   end
 
   # Other scopes may use custom stacks.
