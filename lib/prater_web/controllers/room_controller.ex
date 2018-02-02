@@ -27,7 +27,7 @@ defmodule PraterWeb.RoomController do
   end
 
   def show(conn, %{"id" => id}) do
-    room = Prater.Repo.get!(Room, id)
+    room = Conversation.get_room!(id)
     render(conn, "show.html", room: room)
   end
 end
