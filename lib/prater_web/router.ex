@@ -22,6 +22,7 @@ defmodule PraterWeb.Router do
     get "/rooms/:id", RoomController, :show
     get "/rooms/:id/edit", RoomController, :edit
     put "/rooms/:id", RoomController, :update
+    delete "/rooms/:id", RoomController, :delete
   end
 
   # Other scopes may use custom stacks.

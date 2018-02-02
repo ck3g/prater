@@ -23,4 +23,8 @@ defmodule Prater.Conversation do
     |> Room.changeset(attrs)
     |> Repo.update()
   end
+
+  def delete_room(%Room{} = room) do
+    Repo.delete(room)
+  end
 end

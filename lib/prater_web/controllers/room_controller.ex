@@ -49,4 +49,13 @@ defmodule PraterWeb.RoomController do
         render(conn, "edit.html", room: room, changeset: changeset)
     end
   end
+
+  def delete(conn, %{"id" => id}) do
+    room = Conversation.get_room!(id)
+    {:ok, _room} = Conversation.delete_room(room)
+
+    conn
+    |> put_flash(:info, "Room deleted successfully.")
+    |> redirect(to: room_path(conn, :index))
+  end
 end
