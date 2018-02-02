@@ -5,4 +5,8 @@ defmodule PraterWeb.RoomController do
     rooms = Prater.Conversation.list_rooms()
     render conn, "index.html", rooms: rooms
   end
+
+  def new(conn, _params) do
+    render(conn, "new.html")
+  end
 end
