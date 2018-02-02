@@ -17,4 +17,10 @@ defmodule Prater.Conversation do
   def change_room(%Room{} = room) do
     Room.changeset(room, %{})
   end
+
+  def update_room(%Room{} = room, attrs) do
+    room
+    |> Room.changeset(attrs)
+    |> Repo.update()
+  end
 end
