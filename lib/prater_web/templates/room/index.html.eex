@@ -3,7 +3,9 @@
     <h3>Rooms <%= link "+", to: "/rooms/new", class: "btn btn-success" %></h3>
     <ul class="list-group">
       <%= for room <- @rooms do %>
-        <li class="list-group-item"><%= room.name %></li>
+        <li class="list-group-item">
+          <%= link room.name, to: room_path(@conn, :show, room.id) %>
+        </li>
       <% end %>
     </ul>
   </div>

@@ -25,4 +25,9 @@ defmodule PraterWeb.RoomController do
         render(conn, "new.html", changeset: changeset)
     end
   end
+
+  def show(conn, %{"id" => id}) do
+    room = Prater.Repo.get!(Room, id)
+    render(conn, "show.html", room: room)
+  end
 end
