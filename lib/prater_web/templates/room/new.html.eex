@@ -1,0 +1,3 @@
+<h2>Add new room</h2>
+
+<%= render "form.html", Map.put(assigns, :action, room_path(@conn, :create)) %>
