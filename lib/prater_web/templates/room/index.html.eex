@@ -9,15 +9,15 @@
       <% end %>
     </ul>
   </div>
-  <div class="col-md-9">
-    <div class="jumbotron">
-      <div class="page-header">
-        <h2>Welcome to Prater</h2>
-      </div>
-      <div class="page-header">
-        <h2><small>Choose the room on the left to join</small></h2>
-        <h2><small>or <a href="" class="btn btn-success">Create</a> a new one</small></h2>
-      </div>
-    </div>
+  <div class="col">
+    <section class="jumbotron text-center">
+      <h1 class="jumbotron-heading mb-5">Welcome to Prater</h1>
+      <p class="lead text-muted">
+        Choose the room on the left to join
+      </p>
+      <p class="lead text-muted">
+        or <a href="" class="btn btn-success">Create</a> a new one
+      </p>
+    </section>
   </div>
 </div>
