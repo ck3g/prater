@@ -5,19 +5,24 @@
       <%= for room <- @rooms do %>
         <li class="list-group-item">
           <%= link room.name, to: room_path(@conn, :show, room.id) %>
+          <%= if !is_nil(room.description) && room.description != "" do %>
+            <div class="float-right text-info" data-toggle="tooltip" data-placement="right" data-html="true" title="<%= room.description %>">
+              <i class="fas fa-info-circle"></i>
+            </div>
+          <% end %>
         </li>
       <% end %>
     </ul>
   </div>
-  <div class="col-md-9">
-    <div class="jumbotron">
-      <div class="page-header">
-        <h2>Welcome to Prater</h2>
-      </div>
-      <div class="page-header">
-        <h2><small>Choose the room on the left to join</small></h2>
-        <h2><small>or <a href="" class="btn btn-success">Create</a> a new one</small></h2>
-      </div>
-    </div>
+  <div class="col">
+    <section class="jumbotron text-center">
+      <h1 class="jumbotron-heading mb-5">Welcome to Prater</h1>
+      <p class="lead text-muted">
+        Choose the room on the left to join
+      </p>
+      <p class="lead text-muted">
+        or <a href="" class="btn btn-success">Create</a> a new one
+      </p>
+    </section>
   </div>
 </div>
