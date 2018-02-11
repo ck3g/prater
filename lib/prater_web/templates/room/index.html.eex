@@ -4,7 +4,12 @@
     <ul class="list-group">
       <%= for room <- @rooms do %>
         <li class="list-group-item">
-          <%= link room.name, to: room_path(@conn, :show, room.id), title: room.description, data: [toggle: "tooltip", placement: "right", html: "true"] %>
+          <%= link room.name, to: room_path(@conn, :show, room.id) %>
+          <%= if !is_nil(room.description) && room.description != "" do %>
+            <div class="float-right text-info" data-toggle="tooltip" data-placement="right" data-html="true" title="<%= room.description %>">
+              <i class="fas fa-info-circle"></i>
+            </div>
+          <% end %>
         </li>
       <% end %>
     </ul>
