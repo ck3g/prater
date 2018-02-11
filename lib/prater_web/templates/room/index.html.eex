@@ -4,7 +4,7 @@
     <ul class="list-group">
       <%= for room <- @rooms do %>
         <li class="list-group-item">
-          <%= link room.name, to: room_path(@conn, :show, room.id) %>
+          <%= link room.name, to: room_path(@conn, :show, room.id), title: room.description, data: [toggle: "tooltip", placement: "right", html: "true"] %>
         </li>
       <% end %>
     </ul>
