@@ -21,6 +21,8 @@ defmodule PraterWeb.Router do
 
     resources "/sessions", SessionController, only: [:new, :create]
     delete "/sign_out", SessionController, :delete
+
+    resources "/registrations", RegistrationController, only: [:new, :create]
   end
 
   # Other scopes may use custom stacks.

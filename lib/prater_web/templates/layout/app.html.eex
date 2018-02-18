@@ -24,6 +24,7 @@
         <%= link "Sign Out", to: session_path(@conn, :delete), method: :delete, class: "btn btn-outline-primary" %>
       <% else %>
         <%= link "Sign In", to: session_path(@conn, :new), class: "btn btn-outline-primary" %>
+        <%= link "Sign Up", to: registration_path(@conn, :new), class: "btn btn-outline-primary ml-md-3" %>
       <% end %>
     </div>
 
