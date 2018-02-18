@@ -18,6 +18,11 @@ defmodule PraterWeb.Router do
 
     get "/", RoomController, :index
     resources "/rooms", RoomController
+
+    resources "/sessions", SessionController, only: [:new, :create]
+    delete "/sign_out", SessionController, :delete
+
+    resources "/registrations", RegistrationController, only: [:new, :create]
   end
 
   # Other scopes may use custom stacks.

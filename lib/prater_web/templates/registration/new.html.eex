@@ -1,0 +1,33 @@
+<div class="auth-form-wrapper">
+  <%= form_for @changeset, registration_path(@conn, :create), [as: :registration, class: "form-signin"], fn f -> %>
+    <div class="text-center mb-4">
+      <h1 class="h3 mb-3 font-weight-normal">Sign Up</h1>
+    </div>
+
+    <div class="form-label-group">
+      <%= text_input f, :email, class: "form-control", placeholder: "Email address", required: true, autofocus: true %>
+      <%= label f, :email, "Email address", class: "control-label" %>
+      <%= error_tag f, :email %>
+    </div>
+
+    <div class="form-label-group">
+      <%= text_input f, :username, class: "form-control", placeholder: "User name", required: true %>
+      <%= label f, :username, "User name", class: "control-label" %>
+      <%= error_tag f, :username %>
+    </div>
+
+    <div class="form-label-group">
+      <%= password_input f, :password, class: "form-control", placeholder: "Password", required: true %>
+      <%= label f, :password, class: "control-label" %>
+      <%= error_tag f, :password %>
+    </div>
+
+    <div class="form-label-group">
+      <%= password_input f, :password_confirmation, class: "form-control", placeholder: "Password confirmation", required: true %>
+      <%= label f, :password_confirmation, "Password confirmation", class: "control-label" %>
+      <%= error_tag f, :password_confirmation %>
+    </div>
+
+    <%= submit "Sign Up", class: "btn btn-lg btn-primary btn-block" %>
+  <% end %>
+</div>
