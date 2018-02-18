@@ -19,4 +19,10 @@ defmodule PraterWeb.SessionController do
         |> render("new.html")
     end
   end
+
+  def delete(conn, _params) do
+    conn
+    |> Auth.sign_out()
+    |> redirect(to: room_path(conn, :index))
+  end
 end
