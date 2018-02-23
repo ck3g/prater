@@ -4,6 +4,8 @@ defmodule PraterWeb.RoomController do
   alias Prater.Conversation
   alias Prater.Conversation.Room
 
+  plug :authenticate_user when action not in [:index]
+
   def index(conn, _params) do
     rooms = Conversation.list_rooms()
     render conn, "index.html", rooms: rooms
@@ -57,5 +59,16 @@ defmodule PraterWeb.RoomController do
     conn
     |> put_flash(:info, "Room deleted successfully.")
     |> redirect(to: room_path(conn, :index))
+  end
+
+  defp authenticate_user(conn, _params) do
+    if conn.assigns.user_signed_in? do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You need to sign in or sign up before continuing.")
+      |> redirect(to: session_path(conn, :new))
+      |> halt()
+    end
   end
 end
