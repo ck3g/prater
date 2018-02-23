@@ -1,5 +1,19 @@
 # Prater
 
+## What the hell is Prater?
+
+Prater is a chat web application (well in the near future) build using Elixir and Phoenix framework.
+
+I'm building the application in order to learn Phoenix and describe the process of learning/building that app on my [blog](http://whatdidilearn.info/tags#Phoenix). 
+
+Building the application like that allows me to cover a wide range of topics.
+
+The implementation may miss some points, can have no tests and unfinished features. But that is mostly because those topics are waiting their time to be described in the blog.
+
+Let's see how far it would lead me in my learning journey.
+
+## How to try it out
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
@@ -9,12 +23,3 @@ To start your Phoenix server:
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
-
-## Learn more
-
-  * Official website: http://www.phoenixframework.org/
-  * Guides: http://phoenixframework.org/docs/overview
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
