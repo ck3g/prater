@@ -17,7 +17,7 @@ defmodule PraterWeb.RoomController do
   end
 
   def create(conn, %{"room" => room_params}) do
-    case Conversation.create_room(room_params) do
+    case Conversation.create_room(conn.assigns.current_user, room_params) do
       {:ok, room} ->
         conn
         |> put_flash(:info, "Room created successfully.")

@@ -8,8 +8,9 @@ defmodule Prater.Conversation do
 
   def get_room!(id), do: Repo.get!(Room, id)
 
-  def create_room(attrs \\ %{}) do
-    %Room{}
+  def create_room(user, attrs \\ %{}) do
+    user
+    |> Ecto.build_assoc(:rooms)
     |> Room.changeset(attrs)
     |> Repo.insert()
   end
