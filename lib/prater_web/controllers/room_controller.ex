@@ -3,6 +3,7 @@ defmodule PraterWeb.RoomController do
 
   alias Prater.Conversation
   alias Prater.Conversation.Room
+  alias Prater.Auth.Authorizer
 
   plug PraterWeb.Plugs.AuthenticateUser when action not in [:index]
   plug :authorize_user when action in [:edit, :update, :delete]
@@ -66,7 +67,7 @@ defmodule PraterWeb.RoomController do
     %{params: %{"id" => room_id}} = conn
     room = Conversation.get_room!(room_id)
 
-    if conn.assigns.current_user.id == room.user_id do
+    if Authorizer.can_manage?(conn.assigns.current_user, room) do
       conn
     else
       conn
