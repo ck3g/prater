@@ -5,6 +5,7 @@ defmodule PraterWeb.RoomController do
   alias Prater.Conversation.Room
 
   plug PraterWeb.Plugs.AuthenticateUser when action not in [:index]
+  plug :authorize_user when action in [:edit, :update, :delete]
 
   def index(conn, _params) do
     rooms = Conversation.list_rooms()
@@ -59,5 +60,19 @@ defmodule PraterWeb.RoomController do
     conn
     |> put_flash(:info, "Room deleted successfully.")
     |> redirect(to: room_path(conn, :index))
+  end
+
+  defp authorize_user(conn, _params) do
+    %{params: %{"id" => room_id}} = conn
+    room = Conversation.get_room!(room_id)
+
+    if conn.assigns.current_user.id == room.user_id do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You are not authorized to access that page")
+      |> redirect(to: room_path(conn, :index))
+      |> halt()
+    end
   end
 end
