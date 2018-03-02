@@ -2,7 +2,7 @@ defmodule PraterWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", PraterWeb.RoomChannel
+  channel "room:*", PraterWeb.RoomChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
