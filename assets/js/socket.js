@@ -59,4 +59,25 @@ channel.join()
   .receive("ok", resp => { console.log("Joined successfully", resp) })
   .receive("error", resp => { console.log("Unable to join", resp) })
 
+channel.on("room:lobby:new_message", (message) => {
+  console.log("message", message)
+  renderMessage(message)
+});
+
+document.querySelector("#new-message").addEventListener('submit', (e) => {
+  e.preventDefault()
+  let messageInput = e.target.querySelector('#message-content')
+
+  channel.push('message:add', { message: messageInput.value })
+
+  messageInput.value = ""
+});
+
+const renderMessage = function(message) {
+  let messageTemplate = `
+    <li class="list-group-item">${message.content}</li>
+  `
+  document.querySelector("#messages").innerHTML += messageTemplate
+};
+
 export default socket
