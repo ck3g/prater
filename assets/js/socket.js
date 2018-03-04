@@ -53,25 +53,29 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 
 socket.connect()
 
-// Now that you are connected, you can join channels with a topic:
-let channel = socket.channel("room:lobby", {})
-channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
-  .receive("error", resp => { console.log("Unable to join", resp) })
+let channelRoomId = window.channelRoomId;
 
-channel.on("room:lobby:new_message", (message) => {
-  console.log("message", message)
-  renderMessage(message)
-});
+if (channelRoomId) {
+  // Now that you are connected, you can join channels with a topic:
+  let channel = socket.channel(`room:${channelRoomId}`, {})
+  channel.join()
+    .receive("ok", resp => { console.log("Joined successfully", resp) })
+    .receive("error", resp => { console.log("Unable to join", resp) })
 
-document.querySelector("#new-message").addEventListener('submit', (e) => {
-  e.preventDefault()
-  let messageInput = e.target.querySelector('#message-content')
+  channel.on(`room:${channelRoomId}:new_message`, (message) => {
+    console.log("message", message)
+    renderMessage(message)
+  });
 
-  channel.push('message:add', { message: messageInput.value })
+  document.querySelector("#new-message").addEventListener('submit', (e) => {
+    e.preventDefault()
+    let messageInput = e.target.querySelector('#message-content')
 
-  messageInput.value = ""
-});
+    channel.push('message:add', { message: messageInput.value })
+
+    messageInput.value = ""
+  });
+}
 
 const renderMessage = function(message) {
   let messageTemplate = `
