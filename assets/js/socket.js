@@ -53,10 +53,38 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 
 socket.connect()
 
-// Now that you are connected, you can join channels with a topic:
-let channel = socket.channel("topic:subtopic", {})
-channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
-  .receive("error", resp => { console.log("Unable to join", resp) })
+let channelRoomId = window.channelRoomId;
+
+if (channelRoomId) {
+  // Now that you are connected, you can join channels with a topic:
+  let channel = socket.channel(`room:${channelRoomId}`, {})
+  channel.join()
+    .receive("ok", resp => { console.log("Joined successfully", resp) })
+    .receive("error", resp => { console.log("Unable to join", resp) })
+
+  channel.on(`room:${channelRoomId}:new_message`, (message) => {
+    console.log("message", message)
+    renderMessage(message)
+  });
+
+  document.querySelector("#new-message").addEventListener('submit', (e) => {
+    e.preventDefault()
+    let messageInput = e.target.querySelector('#message-content')
+
+    channel.push('message:add', { message: messageInput.value })
+
+    messageInput.value = ""
+  });
+}
+
+const renderMessage = function(message) {
+  let messageTemplate = `
+    <li class="list-group-item">
+      <strong>${message.user.username}</strong>:
+      ${message.content}
+    </li>
+  `
+  document.querySelector("#messages").innerHTML += messageTemplate
+};
 
 export default socket
