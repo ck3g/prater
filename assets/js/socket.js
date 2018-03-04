@@ -79,7 +79,10 @@ if (channelRoomId) {
 
 const renderMessage = function(message) {
   let messageTemplate = `
-    <li class="list-group-item">${message.content}</li>
+    <li class="list-group-item">
+      <strong>${message.user.username}</strong>:
+      ${message.content}
+    </li>
   `
   document.querySelector("#messages").innerHTML += messageTemplate
 };
