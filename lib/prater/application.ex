@@ -14,6 +14,7 @@ defmodule Prater.Application do
       supervisor(PraterWeb.Endpoint, []),
       # Start your own worker by calling: Prater.Worker.start_link(arg1, arg2, arg3)
       # worker(Prater.Worker, [arg1, arg2, arg3]),
+      supervisor(PraterWeb.Presence, []),
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
