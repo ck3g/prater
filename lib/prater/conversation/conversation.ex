@@ -1,6 +1,11 @@
 defmodule Prater.Conversation do
   alias Prater.Repo
   alias Prater.Conversation.Room
+  alias Prater.Conversation.Message
+
+  import Ecto.Query
+
+  # === Rooms ===
 
   def list_rooms do
     Repo.all(Room)
@@ -27,5 +32,25 @@ defmodule Prater.Conversation do
 
   def delete_room(%Room{} = room) do
     Repo.delete(room)
+  end
+
+  # === Messages ===
+
+  def list_messages(room_id, limit \\ 15) do
+    Repo.all(
+      from msg in Message,
+      join: user in assoc(msg, :user),
+      where: msg.room_id == ^room_id,
+      order_by: [desc: msg.inserted_at],
+      limit: ^limit,
+      select: %{content: msg.content, user: %{username: user.username}}
+    )
+  end
+
+  def create_message(user, room, attrs \\ %{}) do
+    user
+    |> Ecto.build_assoc(:messages, room_id: room.id)
+    |> Message.changeset(attrs)
+    |> Repo.insert()
   end
 end

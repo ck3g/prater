@@ -3,21 +3,33 @@ defmodule PraterWeb.RoomChannel do
 
   alias Prater.Repo
   alias Prater.Auth.User
+  alias Prater.Conversation
   alias PraterWeb.Presence
 
   def join("room:" <> room_id, _params, socket) do
     send(self(), :after_join)
-    {:ok, %{channel: "room:#{room_id}"}, assign(socket, :room_id, room_id)}
+
+    {
+      :ok,
+      %{messages: Conversation.list_messages(room_id)},
+      assign(socket, :room_id, room_id)
+    }
   end
 
   def handle_in("message:add", %{"message" => content}, socket) do
-    room_id = socket.assigns[:room_id]
+    room = Conversation.get_room!(socket.assigns[:room_id])
     user = find_user(socket)
-    message = %{content: content, user: %{username: user.username}}
 
-    broadcast!(socket, "room:#{room_id}:new_message", message)
+    case Conversation.create_message(user, room, %{content: content}) do
+      {:ok, message} ->
+        message = Repo.preload(message, :user)
+        message_template = %{content: message.content, user: %{username: message.user.username}}
+        broadcast!(socket, "room:#{message.room_id}:new_message", message_template)
+        {:reply, :ok, socket}
 
-    {:reply, :ok, socket}
+      {:error, _reason} ->
+        {:reply, :error, socket}
+    end
   end
 
   def handle_in("user:typing", %{"typing" => typing}, socket) do

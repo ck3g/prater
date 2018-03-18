@@ -9,6 +9,7 @@ defmodule Prater.Conversation.Room do
     field :name, :string
     field :topic, :string
     belongs_to :user, Prater.Auth.User
+    has_many :messages, Prater.Conversation.Message
 
     timestamps()
   end
