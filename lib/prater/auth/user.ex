@@ -11,6 +11,7 @@ defmodule Prater.Auth.User do
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
     has_many :rooms, Prater.Conversation.Room
+    has_many :messages, Prater.Conversation.Message
 
     timestamps()
   end
