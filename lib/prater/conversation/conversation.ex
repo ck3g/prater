@@ -1,6 +1,9 @@
 defmodule Prater.Conversation do
   alias Prater.Repo
   alias Prater.Conversation.Room
+  alias Prater.Conversation.Message
+
+  # === Rooms ===
 
   def list_rooms do
     Repo.all(Room)
@@ -27,5 +30,14 @@ defmodule Prater.Conversation do
 
   def delete_room(%Room{} = room) do
     Repo.delete(room)
+  end
+
+  # === Messages ===
+
+  def create_message(user, room, attrs \\ %{}) do
+    user
+    |> Ecto.build_assoc(:messages, room_id: room.id)
+    |> Message.changeset(attrs)
+    |> Repo.insert()
   end
 end
