@@ -21,6 +21,8 @@ defmodule PraterWeb.ConnCase do
       use Phoenix.ConnTest
       import PraterWeb.Router.Helpers
 
+      import Prater.AuthHelpers
+
       # The default endpoint for testing
       @endpoint PraterWeb.Endpoint
     end
