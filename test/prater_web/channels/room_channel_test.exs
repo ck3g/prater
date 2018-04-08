@@ -35,4 +35,14 @@ defmodule PraterWeb.RoomChannelTest do
 
     assert messages == messages_template
   end
+
+  test "broadcasting presence", %{socket: socket, user: user, room: room} do
+    {:ok, _, _socket} = subscribe_and_join(socket, "room:#{room.id}", %{})
+
+    user_data = %{
+      typing: false, user_id: user.id, username: user.username
+    }
+    assert_push "presence_state", user_data
+    assert_broadcast "presence_diff", user_data
+  end
 end
