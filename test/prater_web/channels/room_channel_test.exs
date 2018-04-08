@@ -45,4 +45,28 @@ defmodule PraterWeb.RoomChannelTest do
     assert_push "presence_state", user_data
     assert_broadcast "presence_diff", user_data
   end
+
+  test "adding a new message", %{socket: socket, user: user, room: room} do
+    {:ok, _, socket} = subscribe_and_join(socket, "room:#{room.id}", %{})
+    ref = push(socket, "message:add", %{"message" => "I'm a new msg"})
+
+    assert_reply ref, :ok, %{}
+
+    msg = get_last_message()
+
+    msg_template = %{content: msg.content, user: %{username: user.username}}
+    broadcast_event = "room:#{msg.room_id}:new_message"
+
+    assert_broadcast "presence_diff", %{}
+    assert_broadcast broadcast_event, msg_template
+    refute is_nil(msg)
+  end
+
+
+  defp get_last_message do
+    alias Prater.Conversation.Message
+    import Ecto.Query
+
+    Prater.Repo.one(from m in Message, order_by: [desc: m.id], limit: 1)
+  end
 end
