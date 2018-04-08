@@ -1,4 +1,7 @@
 defmodule PraterWeb.RoomChannelTest do
+  # Elixir warns about a bunch of unused variables even though they are used
+  @compile :nowarn_unused_vars
+
   use PraterWeb.ChannelCase
 
   alias Prater.Conversation
