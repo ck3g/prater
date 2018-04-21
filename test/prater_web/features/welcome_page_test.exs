@@ -4,6 +4,7 @@ defmodule PraterWeb.WelcomePageTest do
 
   hound_session()
 
+  @tag :ui
   test "page has a correct title" do
     navigate_to("/")
 

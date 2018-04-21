@@ -6,6 +6,7 @@ defmodule PraterWeb.SignInTest do
 
   hound_session()
 
+  @tag :ui
   test "user can sign in with valid credentials" do
     create_user()
     navigate_to("/")
