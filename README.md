@@ -3,8 +3,9 @@
 ## What the hell is Prater?
 
 Prater is a chat web application (well in the near future) build using Elixir and Phoenix framework.
+[Check the demo.](https://prater-app.herokuapp.com/)
 
-I'm building the application in order to learn Phoenix and describe the process of learning/building that app on my [blog](http://whatdidilearn.info/tags#Phoenix). 
+I'm building the application in order to learn Phoenix and describe the process of learning/building that app on my [blog](http://whatdidilearn.info/tags#Phoenix).
 
 Building the application like that allows me to cover a wide range of topics.
 
