@@ -16,7 +16,7 @@
   </div>
   <div class="col">
     <section class="jumbotron text-center">
-      <h1 class="jumbotron-heading mb-5">Welcome to Prater</h1>
+      <div id="welcome-title-container"></div>
       <p class="lead text-muted">
         Choose the room on the left to join
       </p>

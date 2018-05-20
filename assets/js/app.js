@@ -13,6 +13,13 @@ import "phoenix_html"
 
 import socket from "./socket"
 
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import WelcomeTitle from './components/WelcomeTitle';
+
+ReactDOM.render(<WelcomeTitle />, document.getElementById("welcome-title-container"));
+
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
