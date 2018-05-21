@@ -1,11 +1,4 @@
-// Brunch automatically concatenates all files in your
-// watched paths. Those paths can be configured at
-// config.paths.watched in "brunch-config.js".
-//
-// However, those files will only be executed if
-// explicitly imported. The only exception are files
-// in vendor, which are never wrapped in imports and
-// therefore are always executed.
+import css from "../css/app.scss"
 
 // Import dependencies
 //
@@ -19,6 +12,13 @@ import "phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 import socket from "./socket"
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import WelcomeTitle from './components/WelcomeTitle';
+
+ReactDOM.render(<WelcomeTitle />, document.getElementById("welcome-title-container"));
 
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
