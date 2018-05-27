@@ -5,11 +5,10 @@ defmodule Prater.Auth do
   def sign_in(email, password) do
     user = Repo.get_by(User, email: email)
 
-    cond do
-      user && Comeonin.Bcrypt.checkpw(password, user.encrypted_password) ->
-        {:ok, user}
-      true ->
-        {:error, :unauthorized}
+    if user && Comeonin.Bcrypt.checkpw(password, user.encrypted_password) do
+      {:ok, user}
+    else
+      {:error, :unauthorized}
     end
   end
 
@@ -18,6 +17,8 @@ defmodule Prater.Auth do
   end
 
   def register(params) do
-    User.registration_changeset(%User{}, params) |> Repo.insert()
+    %User{}
+    |> User.registration_changeset(params)
+    |> Repo.insert()
   end
 end
