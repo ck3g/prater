@@ -1,18 +1,28 @@
 <div class="row">
-  <div class="col-md-3">
-    <h3>Rooms <%= link "+", to: "/rooms/new", class: "btn btn-success" %></h3>
-    <ul class="list-group">
-      <%= for room <- @rooms do %>
-        <li class="list-group-item">
-          <%= link room.name, to: room_path(@conn, :show, room.id) %>
-          <%= if !is_nil(room.description) && room.description != "" do %>
-            <div class="float-right text-info" data-toggle="tooltip" data-placement="right" data-html="true" title="<%= room.description %>">
-              <i class="fas fa-info-circle"></i>
-            </div>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
+  <div class="col-md-2 rooms-list-sidebar">
+    <div class="section">
+      <div class="section-title">
+        Rooms
+        <%= link to: "/rooms/new", class: "float-right section-title-link" do %>
+          <i class="fas fa-plus-circle"></i>
+        <% end %>
+      </div>
+      <div class="section-items">
+        <%= for room <- @rooms do %>
+          <div class="section-item">
+            <%= link to: room_path(@conn, :show, room.id) do %>
+              <span class="channel-icon">#</span>
+              <%= room.name %>
+            <% end %>
+            <%= if !is_nil(room.description) && room.description != "" do %>
+              <div class="float-right text-info" data-toggle="tooltip" data-placement="right" data-html="true" title="<%= room.description %>">
+                <i class="fas fa-info-circle"></i>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
   <div class="col">
     <section class="jumbotron text-center">
