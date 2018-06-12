@@ -1,0 +1,47 @@
+.rooms-list-sidebar {
+  padding: 0;
+  background-color: #e9ecef;
+  color: #555;
+
+  .section {
+    padding: 0;
+
+    .section-title {
+      font-size: 1.1em;
+      font-weight: 500;
+      padding: 10px 10px 15px 15px;
+
+      &:hover {
+        color: #000;
+      }
+
+      .section-title-link {
+        font-size: 0.9em;
+        color: #28a745;
+        margin-top: 1px;
+      }
+    }
+
+    .section-items {
+
+      .section-item {
+        padding: 2px 10px 2px 15px;
+        font-weight: 300;
+
+        &:hover {
+          background: #d8dbde;
+        }
+
+        .channel-icon {
+          font-weight: 100;
+          opacity: 0.75;
+        }
+
+        a {
+          color: #333;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
